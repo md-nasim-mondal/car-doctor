@@ -5,12 +5,12 @@ const Services = () => {
   const [services, setServices] = useState([]);
 
   useEffect(() => {
-    fetch("/services.json")
+    fetch("http://localhost:5000/services")
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
   return (
-    <div>
+    <div className="my-16">
       <div className="text-center space-y-5 mt-4">
         <h3 className="text-2xl font-bold text-orange-500">Services</h3>
         <h2 className="text-5xl font-bold">Our Service Area</h2>

@@ -1,14 +1,29 @@
-import { Link } from "react-router-dom"; 
-import logo from '../../../assets/logo.svg'
+import { Link } from "react-router-dom";
+import logo from "../../../assets/logo.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
-  const navItems = <>
-    <li><Link to='/'>Home</Link></li>
-    <li><Link to='/'>About</Link></li>
-    <li><Link to='/'>Services</Link></li>
-    <li><Link to='/'>Blog</Link></li>
-    <li><Link to='/'>Contact</Link></li>
-  </>
+  const { user, logOut } = useContext(AuthContext);
+  const navItems = (
+    <>
+      <li>
+        <Link to="/">Home</Link>
+      </li>
+      <li>
+        <Link to="/">About</Link>
+      </li>
+      <li>
+        <Link to="/">Services</Link>
+      </li>
+      <li>
+        <Link to="/">Blog</Link>
+      </li>
+      <li>
+        <Link to="/">Contact</Link>
+      </li>
+    </>
+  );
   return (
     <div>
       <div className="navbar bg-base-100 h-28 mb-4">
@@ -35,14 +50,17 @@ const Navbar = () => {
               {navItems}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost text-xl"><img src={logo} alt="" /></Link>
+          <Link to="/" className="btn btn-ghost text-xl">
+            <img src={logo} alt="" />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-           {navItems}
-          </ul>
+          <ul className="menu menu-horizontal px-1">{navItems}</ul>
         </div>
-        <div className="navbar-end">
+        <div className="navbar-end gap-4">
+          {
+            user ? <button onClick={logOut} className="btn btn-outline">Sign Out</button> : <Link to='/login'><button>SignIn</button></Link>
+          }
           <button className="btn btn-outline btn-warning">Appointment</button>
         </div>
       </div>
